@@ -2,7 +2,7 @@
 '''
 Author: linxuan
 Description: 爬格子随机练习程序
-FilePath: /Desktop/今天也要练爬格子1.0.py
+FilePath: /scrips/python/今天也要练爬格子.py
 '''
 
 import os
