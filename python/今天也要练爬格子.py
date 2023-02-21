@@ -47,6 +47,11 @@ stdscr.nodelay(True)    # 不等待输入
 stdscr.timeout(1000)    # 设置超时时间
 tot = 0
 types = []
+def clear_stdscr():
+    stdscr.timeout(0)
+    while stdscr.getch() !=-1:
+        continue
+    stdscr.timeout(1000)
 # 导入权重
 if os.path.exists(CONFIG_PATH):
     try: 
@@ -61,8 +66,7 @@ if types == []:
     types = [t.split(' ') for t in DEFAULT_WEIGHT.split('\n') if t != '']
     types = [[int(i) for i in t] for t in types]
 while True:
-    types = random.choices(types, weights=[t[4] for t in types], k=len(types))
-    t = types[0]
+    t = random.choices(types, weights=[t[4] for t in types], k=1)[0]
     stdscr.addstr(0, 0, "now: %d %d %d %d" % (t[0], t[1], t[2], t[3]))
     stdscr.refresh()
     left = PRICTIME_TIME
@@ -109,7 +113,9 @@ while True:
                 pickle.dump(types, f)
         stdscr.addstr(4, 0, " "*100)
         stdscr.refresh()
+        
     change_weight()
 
     stdscr.clear()
     stdscr.refresh()
+    clear_stdscr()
